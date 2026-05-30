@@ -28,40 +28,4 @@ uploadArchives {
         }
     }
 }
-// ===== CONFIGURACIÓN PARA SONARCLOUD =====
 
-// Plugin de SonarQube (para subir el análisis)
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:4.4.1.3373"
-    }
-}
-
-apply plugin: "org.sonarqube"
-
-// Plugin de JaCoCo (para cobertura de tests)
-apply plugin: "jacoco"
-
-// Configurar JaCoCo para que genere informe XML
-test {
-    finalizedBy jacocoTestReport
-}
-
-jacocoTestReport {
-    dependsOn test
-    reports {
-        xml.required = true
-    }
-}
-
-// Datos de tu proyecto en SonarCloud
-sonarqube {
-    properties {
-        property "sonar.projectKey", "shirley-11_tvrenamer"
-        property "sonar.organization", "shirley-11"
-        property "sonar.host.url", "https://sonarcloud.io"
-    }
-}
